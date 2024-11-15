@@ -38,14 +38,14 @@ class CursoController {
         try {
             const { id } = req.params;
 
-            await CursoModel.findByIdAndUpdate(id, req.doby);
+            await CursoModel.findByIdAndUpdate(id, req.body);
 
             return res.status(200).json({message: "curse updated"});
         } catch (error) {
             return res.status(404).json({ message: "failed to update curse"});
         }
     }
-
+    //DELETE
     async destroy(req, res) {
         try {
             const { id } = req.params;
