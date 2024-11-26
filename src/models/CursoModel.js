@@ -6,6 +6,7 @@ const CursoSchema = new mongoose.Schema({
   descricao: { type: String, required: true },
   preco: { type: Number, required: true },
   materia: { type: String, required: true },
+  qtd_alunos: { type: Number, required: true },
   modulos: [
     {
       _id: { type: String, required: true },
