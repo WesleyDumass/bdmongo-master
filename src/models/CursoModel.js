@@ -1,18 +1,19 @@
-const mongoose = require ('mongoose');
+const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
-
-const CursoSchema = new Schema({
-    id: ObjectId,
-    nome_curso: String,
-    aval_geral: Number,
-    descricao: String,
-    preco: Number,
-    material: String,
-    modulos: String
+const CursoSchema = new mongoose.Schema({
+  nome_curso: { type: String, required: true },
+  avaliacao_geral: { type: Number, required: true },
+  descricao: { type: String, required: true },
+  preco: { type: Number, required: true },
+  materia: { type: String, required: true },
+  modulos: [
+    {
+      _id: { type: String, required: true },
+      nome: { type: String, required: true },
+      duracao_estimada: { type: Number, required: true },
+      descricao: { type: String, required: true },
+    },
+  ],
 });
 
-const CursoModel = mongoose.model('cursos', CursoSchema);
-
-module.exports = CursoModel;
+module.exports = mongoose.model('Curso', CursoSchema);
