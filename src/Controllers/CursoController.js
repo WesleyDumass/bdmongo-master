@@ -9,11 +9,23 @@ class CursoController {
     }
 
     //READ
-    async index(req, res) {
-       const cursos = await CursoModel.find();
-       
-       return res.status(200).json(cursos);
-    }
+    async index(req, res) {                                                                                                 
+                                                                                                                          
+        const {pesquisa} = req.body                                                                                     
+  const cursos = await CursoModel.aggregate(                                                                            
+          [{                                                                                                            
+                  $search:{                                                                                             
+                          index:"default",                                                                              
+                          text:{                                                                                        
+                                  query:pesquisa,                                                                       
+                                  path:['nome_curso', 'materia', 'descricao']                                           
+                          }                                                                                             
+                  }                                                                                                     
+          }]                                                                                                            
+  );                                                                                                                    
+                                                                                                                        
+  return res.status(200).json(cursos);                                                                                  
+}
 
     // READ (ID)
     async show(req, res) {
